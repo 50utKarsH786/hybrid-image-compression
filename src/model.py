@@ -15,10 +15,24 @@ Reference:
 """
 
 import numpy as np
-import tensorflow as tf
-from tensorflow.keras import layers, Model, regularizers
 import pywt
 from sklearn.cluster import KMeans
+
+# TensorFlow is imported lazily to allow non-TF modules to work without it
+tf = None
+layers = None
+Model = None
+regularizers = None
+
+def _ensure_tf():
+    global tf, layers, Model, regularizers
+    if tf is None:
+        import tensorflow as _tf
+        from tensorflow.keras import layers as _layers, Model as _Model, regularizers as _regularizers
+        tf = _tf
+        layers = _layers
+        Model = _Model
+        regularizers = _regularizers
 
 
 # ---------------------------------------------------------------------------
@@ -157,6 +171,7 @@ def array_to_coeffs(arr: np.ndarray, level: int = 1):
 # ---------------------------------------------------------------------------
 
 def build_sdae(input_shape=(256, 256, 3), bottleneck_dim: int = 64) -> tuple:
+    _ensure_tf()
     """
     Build the Stacked Denoising Autoencoder (SDAE).
 
@@ -233,7 +248,7 @@ def build_sdae(input_shape=(256, 256, 3), bottleneck_dim: int = 64) -> tuple:
 # 5. Combined Loss: MSE + SSIM
 # ---------------------------------------------------------------------------
 
-def combined_loss(y_true: tf.Tensor, y_pred: tf.Tensor, alpha: float = 0.8) -> tf.Tensor:
+def combined_loss(y_true, y_pred, alpha: float = 0.8):
     """
     Loss = alpha * MSE + (1 - alpha) * (1 - SSIM)
 
@@ -241,6 +256,7 @@ def combined_loss(y_true: tf.Tensor, y_pred: tf.Tensor, alpha: float = 0.8) -> t
     ----------
     alpha : float  weight for MSE component (default 0.8)
     """
+    _ensure_tf()
     mse = tf.reduce_mean(tf.square(y_true - y_pred))
     ssim = tf.reduce_mean(tf.image.ssim(y_true, y_pred, max_val=1.0))
     return alpha * mse + (1.0 - alpha) * (1.0 - ssim)
@@ -286,6 +302,7 @@ class HybridCompressor:
     # ------------------------------------------------------------------
     def build(self):
         """Instantiate the SDAE models."""
+        _ensure_tf()
         self.autoencoder, self.encoder, self.decoder = build_sdae(
             input_shape=self.input_shape,
             bottleneck_dim=self.bottleneck_dim,

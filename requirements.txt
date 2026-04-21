@@ -2,7 +2,7 @@
 # Hybrid Deep Learning Image Compression
 # ----------------------------------------
 # Core deep learning
-tensorflow>=2.12.0,<2.16.0
+tensorflow>=2.16.0
 
 # Image processing
 opencv-python>=4.7.0
