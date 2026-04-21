@@ -1,0 +1,56 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+.env
+
+# Jupyter
+.ipynb_checkpoints/
+*.ipynb
+
+# Model weights (large files — use Git LFS or store externally)
+outputs/
+results/
+*.h5
+*.pb
+*.ckpt*
+*.index
+*.data-*
+
+# Dataset folders (download separately)
+data/
+
+# Logs
+*.log
+*.csv
+wandb/
+runs/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# macOS
+.DS_Store
+
+# Coverage
+.coverage
+coverage.xml
+htmlcov/
+
+# Temporary
+tmp/
+temp/
+*.tmp
