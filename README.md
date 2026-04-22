@@ -258,14 +258,6 @@ main           ← production-ready, protected (no direct pushes)
         └── bugfix/fix-<short-description>
 ```
 
-**Rules:**
-- Never push directly to `main`
-- Always branch off `develop`
-- Open a Pull Request (PR) to merge back into `develop`
-- `main` is updated only via PR from `develop` after review
-
----
-
 ### Commit Message Convention
 
 Use the **Conventional Commits** format:
@@ -309,44 +301,6 @@ git commit -m "perf(kmeans): reduce GLCM sample size to 200 for faster fitting"
 ### Step-by-Step for Each Member
 
 #### Initial setup (once per member)
-
-```bash
-# 1. Fork the repo on GitHub (or clone directly if you have access)
-git clone https://github.com/YOUR_USERNAME/hybrid-image-compression.git
-cd hybrid-image-compression
-
-# 2. Add the main repo as upstream (if you forked)
-git remote add upstream https://github.com/TEAM_USERNAME/hybrid-image-compression.git
-
-# 3. Create and switch to your feature branch
-git checkout develop
-git checkout -b feature/your-feature-name
-```
-
-#### Daily workflow
-
-```bash
-# 1. Keep your branch up to date with develop
-git fetch origin
-git merge origin/develop
-
-# 2. Make your changes ...
-
-# 3. Stage and commit (multiple small commits are better than one large one)
-git add src/model.py
-git commit -m "feat(swt): implement 2D SWT decomposition per cluster"
-
-git add tests/test_model.py
-git commit -m "test(swt): add round-trip reconstruction test for SWT/ISWT"
-
-# 4. Push your branch to GitHub
-git push origin feature/your-feature-name
-
-# 5. Open a Pull Request on GitHub:
-#    base: develop  ←  compare: feature/your-feature-name
-#    Add description, tag reviewers (teammates)
-```
-
 
 
 ## Running Tests
