@@ -121,13 +121,6 @@ hybrid-image-compression/
 
 ## Setup
 
-### 1. Clone the repository
-
-```bash
-git clone https://github.com/YOUR_USERNAME/hybrid-image-compression.git
-cd hybrid-image-compression
-```
-
 ### 2. Create a virtual environment
 
 ```bash
@@ -311,14 +304,6 @@ git commit -m "chore(deps): pin tensorflow to 2.12 for stability"
 git commit -m "perf(kmeans): reduce GLCM sample size to 200 for faster fitting"
 ```
 
-**❌ Bad commit messages (avoid these):**
-```
-git commit -m "update"
-git commit -m "fixed stuff"
-git commit -m "wip"
-git commit -m "changes"
-```
-
 ---
 
 ### Step-by-Step for Each Member
@@ -362,23 +347,7 @@ git push origin feature/your-feature-name
 #    Add description, tag reviewers (teammates)
 ```
 
-#### Merging to develop (after PR approval)
 
-```bash
-# On GitHub: click "Merge pull request" (use "Squash and merge" for clean history)
-# Then delete the feature branch on GitHub
-```
-
-#### Releasing to main (team lead / at project milestones)
-
-```bash
-git checkout main
-git merge develop
-git tag -a v1.0.0 -m "release: initial working model with all components"
-git push origin main --tags
-```
-
----
 
 ## Running Tests
 
@@ -406,7 +375,7 @@ CI runs automatically on every push and pull request via GitHub Actions.
 | Member 3 | `feature/swt-sdae-model` | SWT pipeline + SDAE architecture + HybridCompressor (`src/model.py`) |
 | Member 4 | `feature/evaluation-and-demo` | Metrics, evaluation scripts, demo, Colab notebook |
 
-> Replace "Member N" with real names before sharing the README.
+
 
 ---
 
